@@ -1,0 +1,44 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-light navbar-default">
+  <div class="container">
+    <a class="navbar-brand" href="#"
+      ><span class="logo-name">Fullstack Dev Tutorials</span></a
+    >
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarTogglerDemo02"
+      aria-controls="navbarTogglerDemo02"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <form class="search-form">
+        <input
+          class="search-input"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="search-button" type="submit">
+          <i class="fa fa-search search-icon"></i>
+        </button>
+      </form>
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <ng-container *ngFor="let item of headerLinks">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [routerLink]="item.path"
+              routerLinkActive="active"
+            >
+              {{item.name}}
+            </a>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+</nav>
