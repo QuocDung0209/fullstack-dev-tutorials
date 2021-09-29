@@ -1,0 +1,36 @@
+<div [class]="containerClass" [ngClass]="class">
+  <div
+    #tabActions
+    id="tab-actions"
+    class="nav"
+    [ngClass]="actionsClasses"
+  ></div>
+  <div id="tab-content" class="tab-content" [ngClass]="tabContentClass">
+    <ng-content></ng-content>
+  </div>
+</div>
+
+<!-- EXAMPLE -->
+<!-- <app-tabs>
+    <div #tabContent tab-title="Tab1">Tab1</div>
+    <div #tabContent tab-title="Tab2">Tab2</div>
+    <div #tabContent tab-title="Tab3">Tab3</div>
+</app-tabs> -->
+
+<!-- BOOTSTRAP TABS UASGE -->
+<!-- <div class="nav nav-tabs">
+  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab1">Tab1</button>
+  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab2">Tab2</button>
+  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab3">Tab3</button>
+</div>
+<div class="tab-content tab-content-row">
+  <div class="tab-pane fade active show" id="tab1">
+    Tab1
+  </div>
+  <div class="tab-pane fade" id="tab2">
+    Tab2
+  </div>
+  <div class="tab-pane fade" id="tab3">
+    Tab3
+  </div>
+</div> -->

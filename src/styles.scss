@@ -1,1 +1,209 @@
-/* You can add global styles to this file, and also import other style files */
+/***********************************************
+*** CSS For Tooltip Directive
+************************************************/
+.ng-tooltip {
+  position: absolute;
+  max-width: 150px;
+  font-size: 14px;
+  text-align: center;
+  color: #f8f8f2;
+  padding: 3px 8px;
+  background: #282a36;
+  border-radius: 4px;
+  z-index: 999999;
+  opacity: 0;
+}
+.ng-tooltip:after {
+  content: "";
+  position: absolute;
+  border-style: solid;
+}
+.ng-tooltip[data-popper-placement^="top"]:after,
+.ng-tooltip-top:after {
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-color: black transparent transparent transparent;
+}
+.ng-tooltip[data-popper-placement^="bottom"]:after,
+.ng-tooltip-bottom:after {
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-color: transparent transparent black transparent;
+}
+.ng-tooltip[data-popper-placement^="left"]:after,
+.ng-tooltip-left:after {
+  top: 50%;
+  left: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-color: transparent transparent transparent black;
+}
+.ng-tooltip[data-popper-placement^="right"]:after,
+.ng-tooltip-right:after {
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-color: transparent black transparent transparent;
+}
+.ng-tooltip-show {
+  opacity: 1;
+}
+
+/***********************************************
+*** Code Snippets
+************************************************/
+
+.code-block {
+  position: relative;
+  border: 1px solid #dee2e6;
+  border-top: none;
+  border-bottom-right-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+  padding: 15px;
+  background-color: whitesmoke;
+}
+
+.code-block .filename {
+  position: absolute;
+  top: -12px;
+  background-color: #422c2c;
+  color: whitesmoke;
+  font-weight: 600;
+  padding: 0 8px;
+  border-radius: 5px;
+}
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+  background-color: whitesmoke !important;
+  border-color: #dee2e6 #dee2e6 whitesmoke !important;
+  font-weight: 600;
+}
+
+.terminal {
+  position: relative;
+  max-width: 98%;
+  border-radius: 6px;
+  padding: 15px;
+  padding-top: 45px;
+  margin: auto;
+  margin-top: 8px;
+  overflow: hidden;
+  background-color: #c2c3c4;
+}
+
+.terminal::before {
+  content: "\2022 \2022 \2022";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background: rgb(58, 58, 58);
+  color: #c2c3c4;
+  width: 100%;
+  font-size: 2rem;
+  line-height: 0;
+  padding: 16px 0;
+  text-indent: 4px;
+}
+
+/***********************************************
+*** Copy to clipboard
+************************************************/
+
+.wrapper-clipboard {
+  position: relative;
+  float: right;
+}
+
+.btn-clipboard {
+  position: absolute;
+  top: 0.35rem;
+  right: 1.5rem;
+  z-index: 10;
+  display: block;
+  padding: 0.1rem 0.2rem;
+  font-size: 0.65em;
+  color: rgb(155, 154, 154);
+  background-color: #fff;
+  border: 1px solid;
+  border-radius: 0.25rem;
+}
+
+.btn-clipboard:hover,
+.btn-clipboard:focus {
+  color: #0d6efd;
+  background-color: #fff;
+}
+
+// Show tooltip when hovering clipboard button
+.btn-clipboard:hover:before,
+.btn-clipboard:hover:after {
+  position: absolute;
+  /**** Top *****
+  right: 100%;
+  transform: translateX(-50%);
+  **************/
+}
+
+.btn-clipboard:hover:before {
+  content: "Copy to Clipboard";
+  /**** Left *****/
+  right: 100%;
+  left: auto;
+  bottom: 0;
+  margin-bottom: 0.1rem;
+  margin-right: 8px;
+  /**** Top *****
+  bottom: 100%;
+  margin-bottom: 8px;
+  **************/
+  background-color: rgb(0, 0, 0, 0.9);
+  color: white;
+  font-size: 1.25em;
+  text-align: center;
+  width: 120px;
+  padding: 3px 4px;
+  border-radius: 5px;
+}
+
+.btn-clipboard:hover:after {
+  content: "";
+  /**** Top *****
+  // top: 0;
+  // margin-top: -8px;
+  **************/
+  /**** Left *****/
+  left: 0;
+  margin-left: -8px;
+  bottom: 0;
+  transform: translateY(-50%);
+  margin-bottom: 0.25rem;
+  /**************/
+  border: 5px solid transparent;
+  border-left-color: rgb(0, 0, 0, 0.9);
+}
+
+.copied .btn-clipboard:hover:before {
+  content: "Copied!";
+  width: 60px;
+}
+
+/***********************************************
+*** Other
+************************************************/
+blockquote:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 6px;
+  height: 100%;
+  background: #00bec1;
+  border-radius: 6px;
+}
