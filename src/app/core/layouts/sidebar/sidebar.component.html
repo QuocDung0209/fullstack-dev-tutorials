@@ -1,4 +1,5 @@
 <span
+  *ngIf="isShow"
   role="button"
   class="btn btn-menu"
   (click)="toggle()"
@@ -15,7 +16,7 @@
     aria-hidden="true"
   ></i>
 </span>
-<div class="sidebar-container" [class.hidden]="!isOpened">
+<div *ngIf="isShow" class="sidebar-container" [class.hidden]="!isOpened">
   <div class="sidebar-header">{{pageInfo.name}}</div>
   <ul class="sidebar">
     <ng-container *ngFor="let route of routes">

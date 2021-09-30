@@ -13,28 +13,35 @@ const routes: Routes = [
     path: 'reactjs',
     loadChildren: () =>
       import('./reactjs-tutorials/reactjs-tutorials-routing.module').then(
-        (m) => m.ReactjsTutorialsRoutingModule
+        (m) => m.ReactjsTutorialsRoutingModule,
       ),
   },
   {
     path: 'nodejs',
     loadChildren: () =>
       import('./nodejs-tutorials/nodejs-tutorials-routing.module').then(
-        (m) => m.NodejsTutorialsRoutingModule
+        (m) => m.NodejsTutorialsRoutingModule,
       ),
   },
   {
     path: 'css',
     loadChildren: () =>
       import('./css-tutorials/css-tutorials-routing.module').then(
-        (m) => m.CssTutorialsRoutingModule
+        (m) => m.CssTutorialsRoutingModule,
       ),
   },
   {
     path: 'python',
     loadChildren: () =>
       import('./python-tutorials/python-tutorials-routing.module').then(
-        (m) => m.PythonTutorialsRoutingModule
+        (m) => m.PythonTutorialsRoutingModule,
+      ),
+  },
+  {
+    path: 'javascript',
+    loadChildren: () =>
+      import('./javascript-tutorials/javascript-tutorials-routing.module').then(
+        (m) => m.JavascriptTutorialsRoutingModule,
       ),
   },
   {

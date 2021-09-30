@@ -1,23 +1,5 @@
 import { Component } from '@angular/core';
-
-const routes = [
-  {
-    path: '/reactjs',
-    name: 'ReactJs',
-  },
-  {
-    path: '/nodejs',
-    name: 'Nodejs',
-  },
-  {
-    path: '/css',
-    name: 'CSS',
-  },
-  {
-    path: '/python',
-    name: 'Python',
-  },
-];
+import { MAIN_PAGES } from 'src/app/shared/constants/routes.constant';
 
 @Component({
   selector: 'app-header',
@@ -25,5 +7,11 @@ const routes = [
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  headerLinks = routes;
+  headerLinks: PageRoute[] = [];
+
+  constructor() {
+    this.headerLinks = Object.entries(MAIN_PAGES).map(([, value]) => {
+      return { name: value.name, routerLink: '/' + value.mainRoute };
+    });
+  }
 }
