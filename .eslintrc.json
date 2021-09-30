@@ -34,6 +34,7 @@
           }
         ],
         "quotes": ["warn", "single", { "allowTemplateLiterals": true }],
+        "@typescript-eslint/no-empty-function": ["warn"],
         "prettier/prettier": [
           "warn",
           { "singleQuote": true, "parser": "flow" },
