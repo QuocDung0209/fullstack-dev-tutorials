@@ -14,6 +14,7 @@ export class CodeComponent {
   @Input() language = 'typescript';
   @Input() height = 'auto';
   @Input() class = 'code-block';
+  @Input() clipboard = true;
   _code: string = EMPTY_STRING;
   @Input()
   get code(): string {

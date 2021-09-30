@@ -48,6 +48,7 @@
     <h1 class="text-center">Hướng dẫn tạo và cấu hình project bằng Webpack</h1>
     <ng-container *ngTemplateOutlet="webpack"></ng-container>
   </div>
+  <div #tabContent tab-title="Cấu trúc React Folder tối ưu"></div>
 </app-tabs>
 <ng-template #webpack>
   <app-tabs>
@@ -189,7 +190,6 @@
       <p>Thêm các file cấu hình</p>
       <p><strong>.eslintrc</strong></p>
       <app-code
-        [appClipboard]="true"
         [height]="'300px'"
         [class]="'terminal-no-header'"
         [code]="eslintrc"
@@ -197,14 +197,12 @@
       ></app-code>
       <p><strong>.eslintignore</strong></p>
       <app-code
-        [appClipboard]="true"
         [height]="'300px'"
         [class]="'terminal'"
         [code]="eslintignore"
       ></app-code>
       <p><strong>.prettierrc</strong></p>
       <app-code
-        [appClipboard]="true"
         [height]="'300px'"
         [class]="'terminal'"
         [code]="prettierrc"
@@ -212,7 +210,6 @@
       ></app-code>
       <p><strong>.prettierignore</strong></p>
       <app-code
-        [appClipboard]="true"
         [height]="'300px'"
         [class]="'terminal'"
         [code]="prettierignore"
@@ -220,27 +217,15 @@
     </div>
     <div #tabContent tab-title="Thêm script vào package.json">
       <h2>Thêm script vào package.json</h2>
-      <app-code
-        [appClipboard]="true"
-        [height]="'300px'"
-        [code]="packageJson"
-      ></app-code>
+      <app-code [height]="'300px'" [code]="packageJson"></app-code>
     </div>
     <div #tabContent tab-title="Thêm file tsconfig.json">
       <h2>Thêm file tsconfig.json để cấu hình Typescript</h2>
-      <app-code
-        [appClipboard]="true"
-        [height]="'300px'"
-        [code]="tsconfig"
-      ></app-code>
+      <app-code [height]="'300px'" [code]="tsconfig"></app-code>
     </div>
     <div #tabContent tab-title="Thêm file webpack.config.js">
       <h2>Thêm file webpack.config.js</h2>
-      <app-code
-        [appClipboard]="true"
-        [height]="'300px'"
-        [code]="webpackConfig"
-      ></app-code>
+      <app-code [height]="'300px'" [code]="webpackConfig"></app-code>
       <p><strong>Giải thích:</strong></p>
       <ul>
         <li>
@@ -386,21 +371,18 @@
     </div>
     <div #tabContent tab-title="Tạo thư mục public và các files">
       <app-code
-        [appClipboard]="true"
         [height]="'300px'"
         [code]="index"
         [language]="'html'"
         [filename]="'public/index.html'"
       ></app-code>
       <app-code
-        [appClipboard]="true"
         [height]="'300px'"
         [code]="manifest"
         [language]="'json'"
         [filename]="'public/manifest.json'"
       ></app-code>
       <app-code
-        [appClipboard]="true"
         [height]="'300px'"
         [code]="robots"
         [language]="'txt'"
@@ -412,45 +394,43 @@
     </div>
     <div #tabContent tab-title="Thêm các files cần thiết để chạy demo project">
       <app-code
-        [appClipboard]="true"
         [height]="'300px'"
         [code]="env"
         [language]="'.env'"
         [filename]="'.env'"
       ></app-code>
+      <p>
+        <strong>Tạo file <code>.env</code> ở thư mục gốc</strong> và thêm giá
+        trị này vào <code>EXTEND_ESLINT=true</code>. Mục đích là giúp chúng ta
+        có thể thêm các linter khác vào <strong>React</strong>.
+      </p>
       <app-code
-        [appClipboard]="true"
         [height]="'300px'"
         [code]="editorconfig"
         [language]="'.editorconfig'"
         [filename]="'.editorconfig'"
       ></app-code>
       <app-code
-        [appClipboard]="true"
         [height]="'300px'"
         [code]="setupTests"
         [filename]="'src/setupTests.ts'"
       ></app-code>
       <app-code
-        [appClipboard]="true"
         [height]="'300px'"
         [code]="serviceWorker"
         [filename]="'src/serviceWorker.ts'"
       ></app-code>
       <app-code
-        [appClipboard]="true"
         [height]="'300px'"
         [code]="reportWebVitals"
         [filename]="'src/reportWebVitals.ts'"
       ></app-code>
       <app-code
-        [appClipboard]="true"
         [height]="'300px'"
         [code]="indexTsx"
         [filename]="'src/index.tsx'"
       ></app-code>
       <app-code
-        [appClipboard]="true"
         [height]="'300px'"
         [code]="appTsx"
         [filename]="'src/App/App.tsx'"

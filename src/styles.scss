@@ -76,9 +76,15 @@
   background-color: rgb(0, 0, 0, 0.8);
   color: #ffffff;
   border-radius: 0;
-  position: sticky;
-  top: 12px;
-  left: 0;
+}
+
+.code-block {
+  .wrapper-clipboard {
+    .btn-clipboard {
+      position: -webkit-sticky;
+      position: sticky;
+    }
+  }
 }
 
 .nav-tabs .nav-item.show .nav-link,
