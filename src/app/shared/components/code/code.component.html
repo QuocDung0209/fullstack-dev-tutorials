@@ -1,3 +1,9 @@
-<div [class]="class" [style.max-height]="height" [style.overflow-y]="'auto'">
+<div
+  [class]="class"
+  [class.filename-position]="filename"
+  [style.max-height]="height"
+  [style.overflow-y]="'auto'"
+>
+  <div *ngIf="filename" class="filename">{{filename}}</div>
   <pre [innerHTML]="code" [style.margin-bottom]="0"></pre>
 </div>

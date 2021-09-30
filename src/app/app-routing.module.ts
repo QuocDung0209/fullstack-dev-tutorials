@@ -16,36 +16,36 @@ const routes: Routes = [
   {
     path: 'reactjs',
     loadChildren: () =>
-      import('./reactjs-tutorials/reactjs-tutorials-routing.module').then(
-        (m) => m.ReactjsTutorialsRoutingModule
+      import('./reactjs-tutorials/reactjs-tutorials.module').then(
+        (m) => m.ReactjsTutorialsModule
       ),
   },
   {
     path: 'nodejs',
     loadChildren: () =>
-      import('./nodejs-tutorials/nodejs-tutorials-routing.module').then(
-        (m) => m.NodejsTutorialsRoutingModule
+      import('./nodejs-tutorials/nodejs-tutorials.module').then(
+        (m) => m.NodejsTutorialsModule
       ),
   },
   {
     path: 'css',
     loadChildren: () =>
-      import('./css-tutorials/css-tutorials-routing.module').then(
-        (m) => m.CssTutorialsRoutingModule
+      import('./css-tutorials/css-tutorials.module').then(
+        (m) => m.CssTutorialsModule
       ),
   },
   {
     path: 'python',
     loadChildren: () =>
-      import('./python-tutorials/python-tutorials-routing.module').then(
-        (m) => m.PythonTutorialsRoutingModule
+      import('./python-tutorials/python-tutorials.module').then(
+        (m) => m.PythonTutorialsModule
       ),
   },
   {
     path: 'javascript',
     loadChildren: () =>
-      import('./javascript-tutorials/javascript-tutorials-routing.module').then(
-        (m) => m.JavascriptTutorialsRoutingModule
+      import('./javascript-tutorials/javascript-tutorials.module').then(
+        (m) => m.JavascriptTutorialsModule
       ),
   },
   {

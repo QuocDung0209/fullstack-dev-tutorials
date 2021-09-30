@@ -46,7 +46,7 @@ export class TabsComponent implements AfterContentInit {
         (elementRef: ElementRef, index: number) => {
           const tabTitle =
             elementRef.nativeElement.attributes['tab-title'].value;
-          const id = 'app-tabs-index' + index;
+          const id = 'app-tabs-index-' + Math.floor(Math.random() * 1000);
           const buttonElement: HTMLElement =
             this.renderer.createElement('button');
 

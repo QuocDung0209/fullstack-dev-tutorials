@@ -24,7 +24,7 @@ export function TakeUntilDestroy() {
 
     if (typeof originalDestroy !== 'function') {
       console.warn(
-        `${target?.constructor?.name} is using @TakeUntilDestroy but does not implement OnDestroy`,
+        `${target?.constructor?.name} is using @TakeUntilDestroy but does not implement OnDestroy`
       );
     }
 

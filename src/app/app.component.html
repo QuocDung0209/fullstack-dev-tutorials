@@ -2,8 +2,8 @@
 <div class="d-flex flex-row justify-content-start align-items-start">
   <app-sidebar></app-sidebar>
   <div
-    class="w-100 transition-margin"
-    [style.margin-left.rem]="isOpened && !isMobile ? 19.75 : 1"
+    class="w-100 pt-2 pe-3 transition-padding"
+    [style.padding-left.rem]="isOpened && !isMobile ? 19.75 : 1"
   >
     <router-outlet></router-outlet>
   </div>

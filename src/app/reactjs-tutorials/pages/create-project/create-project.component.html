@@ -1,1 +1,517 @@
-<p>create-project works!</p>
+<app-tabs [orientation]="'horizontal'">
+  <div #tabContent tab-title="Tạo project bằng create-react-app">
+    <h1 class="text-center">Hướng dẫn tạo project bằng create-react-app</h1>
+    <blockquote>
+      Chúng ta cần cài đặt NodeJs trước khi bắt đầu:
+      <a
+        href="https://quocdung0209.blogspot.com/2021/05/install-nodejs-on-unbuntu.html"
+        target="_blank"
+        rel="noopener noreferrer"
+        >Linux</a
+      >
+      hoặc
+      <a
+        href="https://quocdung0209.blogspot.com/2021/08/create-and-run-angular-project.html"
+        target="_blank"
+        rel="noopener noreferrer"
+        >Windows</a
+      >
+    </blockquote>
+    <h2>npx</h2>
+    <div [appClipboard]="true">
+      <div class="terminal">npx create-react-app project-name</div>
+    </div>
+    <div>
+      <em><code>npx</code> có sẵn khi cài đặt npm 5.2+ trở lên.</em>
+    </div>
+    <h2>npm</h2>
+    <div [appClipboard]="true">
+      <div class="terminal">npm init react-app project-name</div>
+    </div>
+    <h2>Yarn</h2>
+    <div [appClipboard]="true">
+      <div class="terminal">yarn create react-app project-name</div>
+    </div>
+    <h2>Đọc thêm</h2>
+    <ul>
+      <li>
+        <a
+          href="https://github.com/facebook/create-react-app"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Create React App</a
+        >
+      </li>
+    </ul>
+  </div>
+  <div #tabContent tab-title="Tạo project bằng Webpack sử dụng Typescript">
+    <h1 class="text-center">Hướng dẫn tạo và cấu hình project bằng Webpack</h1>
+    <ng-container *ngTemplateOutlet="webpack"></ng-container>
+  </div>
+</app-tabs>
+<ng-template #webpack>
+  <app-tabs>
+    <div #tabContent tab-title="Webpack và Babel là gì?">
+      <blockquote>
+        <b>Webpack</b> là một công cụ chạy trên môi trường <b>NodeJs</b>, giúp
+        chúng ta đóng gói <b>js, css, image, font</b>… thành một hay nhiều file
+        một cách dễ dàng.
+      </blockquote>
+      <blockquote>
+        <b>Babel</b> là trình biên dịch Javascript thành các version thấp cấp
+        hơn để phù hợp cho các trình duyệt khác nhau.
+      </blockquote>
+    </div>
+    <div #tabContent tab-title="Khởi tạo project">
+      <h2>Khởi tạo project</h2>
+      <blockquote>
+        <code>yarn init --yes</code> hoặc <code>npm init --yes</code>
+      </blockquote>
+      <h2>Cài đặt React</h2>
+      <div class="terminal">yarn add react react-dom</div>
+    </div>
+    <div #tabContent tab-title="Cài đặt Webpack và các loader">
+      <h2>Cài đặt Webpack và các loader</h2>
+      <div [appClipboard]="true">
+        <div class="terminal-no-header">
+          yarn add webpack@5.4.0 webpack-cli@4.2.0 webpack-dev-server@3.11.0
+          style-loader css-loader sass sass-loader file-loader typescript
+          ts-loader -D
+        </div>
+      </div>
+      <p><strong>Giải thích</strong></p>
+      <ul>
+        <li><strong>webpack</strong>&nbsp;là phần lõi của webpack</li>
+        <li>
+          <strong>webpack-cli</strong> giúp ta gõ được lệnh của webpack trên
+          terminal (gián tiếp thông qua file package.json)
+        </li>
+        <li>
+          <strong>webpack-dev-server</strong>&nbsp;hỗ trợ tạo một
+          server&nbsp;<strong>localhost</strong>&nbsp;cho môi
+          trường&nbsp;<strong>dev</strong>
+        </li>
+        <li>
+          <strong>style-loader</strong
+          >,&nbsp;<strong>css-loader</strong>&nbsp;giúp bạn có thể import
+          được&nbsp;<strong>css</strong>&nbsp;vào file&nbsp;<strong>js</strong>
+        </li>
+        <li>
+          <strong>sass</strong>,&nbsp;<strong>sass-loader</strong>&nbsp;giúp bạn
+          biên dịch&nbsp;<strong>scss</strong>&nbsp;sang&nbsp;<strong
+            >css</strong
+          >
+        </li>
+        <li>
+          <strong>file-loader</strong>&nbsp;giúp bạn import được các file ví dụ
+          như&nbsp;<strong>ảnh</strong>,&nbsp;<strong>video</strong>&nbsp;vào
+          file&nbsp;<strong>js</strong>
+        </li>
+        <li><strong>typescript</strong>: Phần lõi của ngôn ngữ Typescript</li>
+        <li>
+          <strong>ts-loader</strong>: Giúp tích hợp Typescript vào webpack
+        </li>
+      </ul>
+    </div>
+    <div #tabContent tab-title="Cài đặt một số plugin bổ trợ webpack">
+      <h2>Cài đặt một số plugin bổ trợ webpack</h2>
+      <div [appClipboard]="true">
+        <div class="terminal-no-header">
+          yarn add clean-webpack-plugin compression-webpack-plugin
+          copy-webpack-plugin dotenv-webpack html-webpack-plugin
+          mini-css-extract-plugin webpack-bundle-analyzer@4.1.0 -D
+        </div>
+      </div>
+      <p><strong>Giải thích</strong></p>
+      <ul>
+        <li>
+          <strong>clean-webpack-plugin</strong>: Giúp dọn dẹp thư mục build
+          trước khi build webpack. Ví dụ thư mục build của bạn đang chứa bản
+          build trước, bây giờ bạn build lại thì plugin này sẽ xóa bản build
+          trước.
+        </li>
+        <li>
+          <strong>compression-webpack-plugin</strong>: Giúp bạn nén các file
+          css, js, html… thành <strong>gzip</strong>
+        </li>
+        <li>
+          <strong>copy-webpack-plugin</strong>: Giúp bạn copy các file ở thư mục
+          dev vào thư mục build. Ví dụ bạn có các file như favicon.ico,
+          robots.txt cùng cấp với index.html, bạn muốn khi build xong thì các
+          file này cũng có mặt ở bản build. Nếu không có plugin này thì bạn phải
+          copy thủ công.
+        </li>
+        <li>
+          <strong>dotenv-webpack:&nbsp;</strong>Giúp bạn dùng được các biến môi
+          trường ở file <strong>.env</strong> và trong app của bạn
+        </li>
+        <li>
+          <strong>html-webpack-plugin</strong>: Giúp clone ra 1 file index.html
+          từ file html ban đầu. Tại sao lại cần clone thì bạn có thể tham khảo
+          bài
+          <a
+            href="https://xdevclass.com/webpack-sieu-toc-2-cau-hinh-typescript-alias-hash-bundle/"
+            data-wpel-link="internal"
+            >Webpack siêu tốc 2: Cấu hình Typescript, alias, hash bundle</a
+          >
+        </li>
+        <li>
+          <strong>mini-css-extract-plugin</strong>: Bình thường thì css sẽ nằm
+          trong file js sau khi build. Và khi chạy app thì js sẽ thêm các đoạn
+          css đó vào thẻ <code>&lt;style&gt;&lt;/style&gt;</code>. Bây giờ mình
+          không muốn như vậy, mình muốn css phải nằm ở file riêng biệt với js và
+          khi chạy app thì js sẽ tự import bằng thẻ <code>&lt;link&gt;</code>.
+          Đó là chức năng của plugin này
+        </li>
+        <li>
+          <strong>webpack-bundle-analyzer</strong>: Giúp bạn phân tích bản
+          build, coi thử thư viện nào đang chiếm bao nhiêu % bản build,…
+        </li>
+      </ul>
+    </div>
+    <div #tabContent tab-title="Cài đặt ESLint và Prettier">
+      <h2>Cài đặt ESLint và Prettier</h2>
+      <div [appClipboard]="true">
+        <div class="terminal-no-header">
+          yarn add eslint babel-eslint eslint-config-react-app eslint-loader
+          eslint-plugin-flowtype eslint-plugin-import eslint-plugin-jsx-a11y
+          eslint-plugin-react eslint-plugin-react-hooks
+          @typescript-eslint/eslint-plugin @typescript-eslint/parser prettier
+          eslint-plugin-prettier eslint-config-prettier -D
+        </div>
+      </div>
+      <p>
+        <strong>Giải thích</strong>: Ngoài <strong>prettier</strong>,
+        <strong>eslint-config-prettier</strong> và
+        <strong>eslint-plugin-prettier</strong> thì còn lại đều là các plugin
+        tiêu chuẩn tương tự như bộ cài <strong>Create React App</strong>.
+      </p>
+      <p>Thêm các file cấu hình</p>
+      <p><strong>.eslintrc</strong></p>
+      <app-code
+        [appClipboard]="true"
+        [height]="'300px'"
+        [class]="'terminal-no-header'"
+        [code]="eslintrc"
+        [language]="'json'"
+      ></app-code>
+      <p><strong>.eslintignore</strong></p>
+      <app-code
+        [appClipboard]="true"
+        [height]="'300px'"
+        [class]="'terminal'"
+        [code]="eslintignore"
+      ></app-code>
+      <p><strong>.prettierrc</strong></p>
+      <app-code
+        [appClipboard]="true"
+        [height]="'300px'"
+        [class]="'terminal'"
+        [code]="prettierrc"
+        [language]="'json'"
+      ></app-code>
+      <p><strong>.prettierignore</strong></p>
+      <app-code
+        [appClipboard]="true"
+        [height]="'300px'"
+        [class]="'terminal'"
+        [code]="prettierignore"
+      ></app-code>
+    </div>
+    <div #tabContent tab-title="Thêm script vào package.json">
+      <h2>Thêm script vào package.json</h2>
+      <app-code
+        [appClipboard]="true"
+        [height]="'300px'"
+        [code]="packageJson"
+      ></app-code>
+    </div>
+    <div #tabContent tab-title="Thêm file tsconfig.json">
+      <h2>Thêm file tsconfig.json để cấu hình Typescript</h2>
+      <app-code
+        [appClipboard]="true"
+        [height]="'300px'"
+        [code]="tsconfig"
+      ></app-code>
+    </div>
+    <div #tabContent tab-title="Thêm file webpack.config.js">
+      <h2>Thêm file webpack.config.js</h2>
+      <app-code
+        [appClipboard]="true"
+        [height]="'300px'"
+        [code]="webpackConfig"
+      ></app-code>
+      <p><strong>Giải thích:</strong></p>
+      <ul>
+        <li>
+          <strong>isDev</strong>: Chúng ta có 2 mode là
+          <strong>development</strong> và <strong>production</strong> tương
+          đương với <strong>dev</strong> và <strong>build</strong>. 2 mode này
+          được truyền vào thông qua<strong> –mode</strong> ở script trong
+          <strong>package.json</strong>.
+        </li>
+        <li>
+          <strong>isAnalyze</strong>: Nhìn vào file package.json chúng ta có câu
+          lệnh <strong>build:analyze</strong>, mình có truyền biến
+          <strong>analyze</strong> vào webpack thông qua <strong>–env</strong>.
+          Biến này dùng để xác định bạn có dùng plugin<strong
+            >BundleAnalyzerPlugin</strong
+          >
+          hay không.
+        </li>
+        <li>
+          <strong>basePlugins</strong>: Những plugins dùng trong mode
+          development.<br />
+          Trong CopyPlugin ta thực hiện copy các file từ public sang thư mục
+          build
+        </li>
+        <li>
+          <strong>CopyPlugin</strong>: Mình copy mọi file trong thư mục
+          <strong>public</strong> vào thư mục <strong>build</strong>, ngoại trừ
+          file <strong>index.html</strong>. Vì <strong>index.html</strong> đã có
+          <strong>HtmlWebpackPlugin</strong> thực hiện việc copy và generate
+          code, nếu không loại trừ sẽ bị xung đột!.
+        </li>
+        <li>
+          <strong>webpack.ProgressPlugin()</strong> giúp chúng ta hiện % khi
+          chạy webpack
+        </li>
+        <li>
+          <strong>CompressionPlugin()</strong> giúp chúng ta nén file build
+          thành gzip, thỉnh thoảng bạn sẽ thấy một số file kích thước nhỏ không
+          được nén, bạn có thể xem cấu hình nén và điều kiện được nén
+          <a
+            href="https://webpack.js.org/plugins/compression-webpack-plugin/"
+            data-wpel-link="external"
+            rel="external noopener noreferrer"
+            >tại đây</a
+          >
+        </li>
+        <li>
+          <strong>prodPlugins</strong>: Những plugins dùng trong mode
+          production.
+        </li>
+        <li>
+          <strong>entry</strong>: File đầu vào cho webpack, file này thường là
+          file import mọi file khác
+        </li>
+        <li><strong>module.rules</strong>: Chứa các loader của webpack</li>
+        <li>
+          Các bạn để ý chỗ <strong>option.name</strong> ở file-loader: Đây là
+          nơi bạn có thể thay đổi tên và đường dẫn file sau khi build. Môi
+          trường dev thì mình giữ nguyên tên và đường dẫn (như vậy khi inspect
+          trên trình duyệt sẽ dễ dàng thấy nguồn gốc file từ đâu ra), còn môi
+          trường production thì mình sẽ chuyển vào thư mục static.
+        </li>
+        <li>
+          <strong>contenthash:6</strong> nghĩa là thêm 1 đoạn hash gồm 6 ký tự
+          vào tên file.
+        </li>
+        <li>
+          <strong>resolve.extensions</strong>: Thứ tự ưu tiên các file khi
+          import
+        </li>
+        <li>
+          <strong>alias</strong>: Tạo alias thuận tiện cho việc import trong
+          webpack. Những nơi cần đường dẫn tuyệt đối thì ta phải dùng
+          <strong>path.resolve()</strong> hoặc <strong>path.join()</strong>
+        </li>
+        <li>
+          <strong>output.path</strong>: Đường dẫn thư mục build. Mình đặt tên
+          thư mục build là build luôn, cho giống với Create React App
+        </li>
+        <li>
+          <strong>output.filename</strong>: Tên file bundle sau khi được build.
+          Cũng có thể quy định thư mục mà file build thuộc về
+        </li>
+        <li>
+          <strong>output.publicPath</strong>: Chứa đường dẫn tương đối mà từ
+          file&nbsp;<strong>index.html</strong>&nbsp;trỏ đến các file trong thư
+          mục <b>build </b>sau khi build. Lưu ý là
+          <strong>file index.html</strong> được build nằm trong thư mục tên là
+          <strong>build</strong>. Ở các bài trước các bạn sẽ thấy mình để giá
+          trị này là <strong>“”</strong>, nhưng bây giờ
+          <strong>“/”</strong>.&nbsp; Lý do khi deploy thì
+          <strong>“”</strong> trình duyệt nó bảo lỗi không load file được, nên
+          phải thêm <strong>“/”</strong> vào nhé.
+        </li>
+        <li>
+          <strong>output.environment:</strong> Mặc định webpack generate ra code
+          dùng 1 số cú pháp của <strong>ES6</strong>, nhưng target mình mong
+          muốn là ES5 nên mình cần chỉnh một số thông số như sau.
+        </li>
+        <li><strong>arrowFunction</strong>: Hỗ trợ arrow function.</li>
+        <li><strong>bigIntLiteral</strong>: Hỗ trợ BigInt</li>
+        <li><strong>const</strong>: Hỗ trợ khai báo const và let</li>
+        <li><strong>destructuring</strong>: Hỗ trợ destructuring</li>
+        <li><strong>dynamicImport</strong>: Hỗ trợ async import</li>
+        <li><strong>forOf</strong>: Hỗ trợ vòng lặp forOf cho các array</li>
+        <li><strong>module</strong>: Hỗ trợ moudle ES6 (import … from ‘…’)’</li>
+        <li><strong>output.devtool</strong>: tùy chọn sourcemap</li>
+        <li>
+          <strong>devServer.contentBase</strong>: Chứa đường dẫn tương đối đến
+          file&nbsp;<code>index.html</code>
+        </li>
+        <li><strong>devServer.port</strong>: port khi chạy localhost</li>
+        <li>
+          <strong>devServer.hot</strong>: Chế độ hot reload. Mặc định thì ở dev
+          server thì webpack sẽ refresh lại trang mỗi khi có thay đổi nhỏ trong
+          code.
+        </li>
+        <li>
+          <strong>devServer.publicPath</strong>: Chứa đường dẫn tương đối từ thư
+          mục&nbsp;<strong>root</strong>&nbsp;trỏ đến thư mục build (ở đây
+          là&nbsp;<strong>dist</strong>). Chú ý phải
+          thêm&nbsp;<code>/</code>&nbsp;ở trước và sau. Nhưng vì dùng
+          HtmlWebpackPlugin nên ta sẽ tính từ chính thư mục dist. Vì thế giá trị
+          cần dùng là&nbsp;<code>/</code>. Ở đây mình không dùng giá trị nào cả,
+          vì mặc định nó đã là&nbsp;<code>/</code>
+        </li>
+        <li>
+          <strong>devServer.watchContentBase</strong>: Nếu bạn có thay đổi gì
+          trong file index.html thì trình duyệt cũng tự động reload.
+        </li>
+        <li>
+          <strong>devServer.historyApiFallback</strong>: Phải set true nếu không
+          khi bạn dùng lazyload module React thì sẽ gặp lỗi không load được
+          file.
+        </li>
+        <li><strong>plugins</strong>: Chứa các plugin Webpack.</li>
+        <li>
+          <strong>performance.maxEntrypointSize</strong>: Khi có 1 file build
+          vượt quá giới hạn này (tính bằng byte) thì sẽ bị warning trên
+          terminal.
+        </li>
+      </ul>
+    </div>
+    <div #tabContent tab-title="Tạo thư mục public và các files">
+      <app-code
+        [appClipboard]="true"
+        [height]="'300px'"
+        [code]="index"
+        [language]="'html'"
+        [filename]="'public/index.html'"
+      ></app-code>
+      <app-code
+        [appClipboard]="true"
+        [height]="'300px'"
+        [code]="manifest"
+        [language]="'json'"
+        [filename]="'public/manifest.json'"
+      ></app-code>
+      <app-code
+        [appClipboard]="true"
+        [height]="'300px'"
+        [code]="robots"
+        [language]="'txt'"
+        [filename]="'public/robots.txt'"
+      ></app-code>
+      <p><strong>public/favicon.icon</strong></p>
+      <p><strong>public/logo192.png</strong></p>
+      <p><strong>public/logo512.png</strong></p>
+    </div>
+    <div #tabContent tab-title="Thêm các files cần thiết để chạy demo project">
+      <app-code
+        [appClipboard]="true"
+        [height]="'300px'"
+        [code]="env"
+        [language]="'.env'"
+        [filename]="'.env'"
+      ></app-code>
+      <app-code
+        [appClipboard]="true"
+        [height]="'300px'"
+        [code]="editorconfig"
+        [language]="'.editorconfig'"
+        [filename]="'.editorconfig'"
+      ></app-code>
+      <app-code
+        [appClipboard]="true"
+        [height]="'300px'"
+        [code]="setupTests"
+        [filename]="'src/setupTests.ts'"
+      ></app-code>
+      <app-code
+        [appClipboard]="true"
+        [height]="'300px'"
+        [code]="serviceWorker"
+        [filename]="'src/serviceWorker.ts'"
+      ></app-code>
+      <app-code
+        [appClipboard]="true"
+        [height]="'300px'"
+        [code]="reportWebVitals"
+        [filename]="'src/reportWebVitals.ts'"
+      ></app-code>
+      <app-code
+        [appClipboard]="true"
+        [height]="'300px'"
+        [code]="indexTsx"
+        [filename]="'src/index.tsx'"
+      ></app-code>
+      <app-code
+        [appClipboard]="true"
+        [height]="'300px'"
+        [code]="appTsx"
+        [filename]="'src/App/App.tsx'"
+      ></app-code>
+    </div>
+    <div #tabContent tab-title="Chạy project">
+      <h2>Cấu trúc folders và files hoàn chỉnh</h2>
+      <div class="images">
+        <img
+          src="../../../../assets/images/initial-react-structure.PNG"
+          alt="reactjs-structure"
+        />
+      </div>
+      <h2>Chạy project khi dev</h2>
+      <div [appClipboard]="true">
+        <div class="terminal">yarn start</div>
+      </div>
+      <h2>Build project để deploy</h2>
+      <div [appClipboard]="true">
+        <div class="terminal">yarn build</div>
+      </div>
+      <h2>Build và phân tích source code</h2>
+      <div [appClipboard]="true">
+        <div class="terminal">yarn build:analyze</div>
+      </div>
+      <blockquote>
+        Ngoài ra bạn có thể <code>yarn lint</code>, <code>yarn lint:fix</code>,
+        <code>yarn prettier</code>, <code>yarn prettier:fix</code> như đã định
+        nghĩa trong file <strong>package.json</strong>.
+      </blockquote>
+    </div>
+    <div #tabContent tab-title="Tài liệu tham khảo">
+      <h2>Tài liệu tham khảo</h2>
+      <ul>
+        <li>
+          <a
+            href="https://xdevclass.com/webpack-sieu-toc-cau-hinh-dev-server-babel-loader-style-loader-file-loader/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Webpack siêu tốc 1: Cấu hình Dev Server, Babel Loader, Style
+            Loader, File Loader</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://xdevclass.com/webpack-sieu-toc-2-cau-hinh-typescript-alias-hash-bundle/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Webpack siêu tốc 2: Cấu hình Typescript, alias, hash bundle</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://xdevclass.com/webpack-sieu-toc-3-cau-hinh-react-typescript-eslint-prettier-hoan-chinh-tu-a-z/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Webpack siêu tốc 3: Cấu hình React, Typescript, ESLint, Prettier
+            hoàn chỉnh từ A-Z</a
+          >
+        </li>
+      </ul>
+    </div>
+  </app-tabs>
+</ng-template>

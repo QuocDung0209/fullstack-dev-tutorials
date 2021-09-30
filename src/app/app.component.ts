@@ -1,7 +1,7 @@
+import { Component, OnDestroy } from '@angular/core';
 import { Observable, fromEvent } from 'rxjs';
 import { debounceTime, map, takeUntil } from 'rxjs/operators';
 
-import { Component } from '@angular/core';
 import { SIDEBAR_OPEN_FEFAULT } from './shared/constants/common';
 import { SidebarService } from './core/services/sidebar.service';
 import { TakeUntilDestroy } from './core/decorators/take-until-destroy.decorator';
@@ -11,7 +11,7 @@ import { TakeUntilDestroy } from './core/decorators/take-until-destroy.decorator
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   title = 'fullstack-dev-tutorials';
 
   isOpened = SIDEBAR_OPEN_FEFAULT;
@@ -35,4 +35,7 @@ export class AppComponent {
         this.isMobile = value < 768;
       });
   }
+
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
+  ngOnDestroy(): void {}
 }

@@ -10,6 +10,7 @@ import hljs from 'highlight.js/lib/common';
   styleUrls: ['./code.component.scss'],
 })
 export class CodeComponent {
+  @Input() filename = EMPTY_STRING;
   @Input() language = 'typescript';
   @Input() height = 'auto';
   @Input() class = 'code-block';
