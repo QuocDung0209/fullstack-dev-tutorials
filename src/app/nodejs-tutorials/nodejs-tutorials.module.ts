@@ -3,12 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { NodejsTutorialsRoutingModule } from './nodejs-tutorials-routing.module';
 
-
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    NodejsTutorialsRoutingModule
-  ]
+  imports: [CommonModule, NodejsTutorialsRoutingModule],
 })
-export class NodejsTutorialsModule { }
+export class NodejsTutorialsModule {}

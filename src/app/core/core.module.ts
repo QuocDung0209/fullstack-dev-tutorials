@@ -3,10 +3,11 @@ import { HeaderComponent } from './layouts/header/header.component';
 import { NgModule } from '@angular/core';
 import { NotfoundComponent } from './layouts/notfound/notfound.component';
 import { RouterModule } from '@angular/router';
+import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 
 @NgModule({
-  declarations: [HeaderComponent, NotfoundComponent],
+  declarations: [HeaderComponent, NotfoundComponent, SidebarComponent],
   imports: [CommonModule, RouterModule],
-  exports: [HeaderComponent, NotfoundComponent],
+  exports: [HeaderComponent, NotfoundComponent, SidebarComponent],
 })
 export class CoreModule {}

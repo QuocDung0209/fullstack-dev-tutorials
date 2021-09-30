@@ -1,0 +1,31 @@
+<span
+  role="button"
+  class="btn btn-menu"
+  (click)="toggle()"
+  [class.menu-hidden]="!isOpened"
+>
+  <i
+    [hidden]="!isOpened"
+    class="fa fa-chevron-circle-left fa-2x text-light"
+    aria-hidden="true"
+  ></i>
+  <i
+    [hidden]="isOpened"
+    class="fa fa-chevron-right fa-2x text-light"
+    aria-hidden="true"
+  ></i>
+</span>
+<div class="sidebar-container" [class.hidden]="!isOpened">
+  <div class="sidebar-header">{{pageInfo.name}}</div>
+  <ul class="sidebar">
+    <ng-container *ngFor="let route of routes">
+      <li
+        class="sidebar-item"
+        [routerLink]="route.routerLink"
+        routerLinkActive="active"
+      >
+        {{route.name}}
+      </li>
+    </ng-container>
+  </ul>
+</div>
