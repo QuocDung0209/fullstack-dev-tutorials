@@ -1,4 +1,8 @@
 import {
+  EMPTY_STRING,
+  SIDEBAR_OPEN_FEFAULT,
+} from 'src/app/shared/constants/common';
+import {
   MAIN_PAGES,
   MAIN_ROUTES,
   PAGE_ROUTES,
@@ -6,7 +10,6 @@ import {
 import { NavigationStart, Router } from '@angular/router';
 
 import { Component } from '@angular/core';
-import { EMPTY_STRING } from 'src/app/shared/constants/common';
 import { SidebarService } from '../../services/sidebar.service';
 import { filter } from 'rxjs/operators';
 
@@ -20,8 +23,8 @@ export class SidebarComponent {
   pageInfo: PageInfo = { name: EMPTY_STRING, mainRoute: EMPTY_STRING };
   routes: PageRoute[] = [];
 
-  isOpened = true;
-  isShow = true;
+  isOpened = SIDEBAR_OPEN_FEFAULT;
+  isShow = SIDEBAR_OPEN_FEFAULT;
 
   // eslint-disable-next-line prettier/prettier
   constructor(private sidebarService: SidebarService, private router: Router) {
@@ -30,6 +33,7 @@ export class SidebarComponent {
       .subscribe((event) => {
         const activatingRoute = (event as { url: string })?.url?.split('/')[1];
         this.isShow = MAIN_ROUTES.includes(activatingRoute);
+        sidebarService.setIsOpened(this.isShow && this.isOpened);
         this.pageInfo = MAIN_PAGES[activatingRoute];
         const pageRoutes = PAGE_ROUTES[activatingRoute];
         if (pageRoutes && pageRoutes instanceof Array) {
@@ -43,12 +47,10 @@ export class SidebarComponent {
           this.routes = [];
         }
       });
-    sidebarService.routes$.subscribe((routes) => {
-      this.routes = routes;
-    });
   }
 
   toggle(): void {
     this.isOpened = !this.isOpened;
+    this.sidebarService.setIsOpened(this.isOpened);
   }
 }

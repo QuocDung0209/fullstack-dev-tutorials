@@ -1,6 +1,7 @@
 .sidebar-container {
   padding: 0;
   margin: 5px 0;
+  position: fixed;
 
   .sidebar-header {
     width: 300px;
@@ -15,7 +16,6 @@
     font-weight: 800;
     background-color: rgb(13, 110, 253);
     color: #ffffff;
-    position: relative;
     transition: all 0.3s ease-in-out;
   }
 
