@@ -42,13 +42,112 @@
           >Create React App</a
         >
       </li>
+      <li>
+        <a
+          href="https://github.com/facebook/create-react-app"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Create React App - Getting Started</a
+        >
+      </li>
     </ul>
   </div>
   <div #tabContent tab-title="Tạo project bằng Webpack sử dụng Typescript">
     <h1 class="text-center">Hướng dẫn tạo và cấu hình project bằng Webpack</h1>
     <ng-container *ngTemplateOutlet="webpack"></ng-container>
   </div>
-  <div #tabContent tab-title="Cấu trúc React Folder tối ưu"></div>
+  <div #tabContent tab-title="Cấu trúc React Folder tối ưu">
+    <div class="row">
+      <div class="col-4">
+        <div class="enlighter-default enlighter-t-atomic">
+          <div class="enlighter">
+            <div><span class="enlighter-text">├───.vscode</span></div>
+            <div><span class="enlighter-text">├───public</span></div>
+            <div><span class="enlighter-text">└───src</span></div>
+            <div><span class="enlighter-text"> ├───@types</span></div>
+            <div><span class="enlighter-text"> ├───apis</span></div>
+            <div><span class="enlighter-text"> ├───App</span></div>
+            <div><span class="enlighter-text"> ├───assets</span></div>
+            <div><span class="enlighter-text"> │ └───images</span></div>
+            <div><span class="enlighter-text"> ├───components</span></div>
+            <div><span class="enlighter-text"> │ ├───Button</span></div>
+            <div><span class="enlighter-text"> │ └───Tabs</span></div>
+            <div><span class="enlighter-text"> ├───constants</span></div>
+            <div><span class="enlighter-text"> ├───guards</span></div>
+            <div><span class="enlighter-text"> ├───helpers</span></div>
+            <div><span class="enlighter-text"> ├───hooks</span></div>
+            <div><span class="enlighter-text"> ├───layouts</span></div>
+            <div><span class="enlighter-text"> │ ├───Header</span></div>
+            <div><span class="enlighter-text"> │ └───Footer</span></div>
+            <div><span class="enlighter-text"> ├───pages</span></div>
+            <div>
+              <span class="enlighter-text"> │ ├───Administration</span>
+            </div>
+            <div><span class="enlighter-text"> │ ├───Home</span></div>
+            <div><span class="enlighter-text"> │ └───Login</span></div>
+            <div><span class="enlighter-text"> ├───reducer</span></div>
+            <div><span class="enlighter-text"> ├───routes</span></div>
+            <div><span class="enlighter-text"> └───store</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-8">
+        <ul>
+          <li>
+            <strong>.vscode</strong>: Folder chứa các setting cho Visual Studio
+            Code.
+          </li>
+          <li>
+            <strong>public</strong>: Folder chứa các files như index.html,
+            favicon.ico, manifest.json, robots.txt và các logo. Nếu chúng ta sử
+            create-react-app để tạo project, nó sẽ tự động tạo ra thư mục public
+            và các file này.
+          </li>
+          <li>
+            <strong>@types:</strong> Chứa các file <em>.d.ts</em> định nghĩa
+            interface, type cho Typescript.
+          </li>
+          <li>
+            <strong>apis:</strong> Hay còn gọi là
+            <strong>services. </strong>Chứa các khai báo function get api như
+            axios,…
+          </li>
+          <li><strong>App</strong>: Chứa App component.</li>
+          <li><strong>assets</strong>: Chứa ảnh, videos, scss, file, …</li>
+          <li>
+            <strong>components</strong>: Chứa các folder component, trong mỗi
+            folder là các file component.
+          </li>
+          <li><strong>constansts:</strong> Chứa các các hằng số, enum.</li>
+          <li><strong>guards</strong>: Chứa các Route cần quyền truy cập.</li>
+          <li>
+            <strong>helpers</strong>: Chứa các function hay dùng, lặp đi lặp
+            lại.
+          </li>
+          <li><strong>hooks</strong>: Chứa các hook đang dùng.</li>
+          <li><strong>layouts</strong>: Chứa layout của dự án.</li>
+          <li><strong>pages</strong>: Chứa các trang của dự án.</li>
+          <li><strong>reducer</strong>: Chứa file reducer.</li>
+          <li><strong>routes</strong>: Chứa các route.</li>
+          <li><strong>store</strong>: chứa file store.</li>
+        </ul>
+      </div>
+    </div>
+    <h2>Tài liệu tham khảo</h2>
+    <ul>
+      <li>
+        <a
+          href="https://xdevclass.com/cau-truc-react-folder-toi-uu-de-bao-tri-de-nang-cap/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Cấu trúc React Folder tối ưu, dễ bảo trì, dễ nâng cấp</a
+        >
+      </li>
+    </ul>
+  </div>
+  <div #tabContent tab-title="Cài đặt Extension và config VS Code">
+    <ng-container *ngTemplateOutlet="vscode"></ng-container>
+  </div>
 </app-tabs>
 <ng-template #webpack>
   <app-tabs>
@@ -185,23 +284,49 @@
         <strong>Giải thích</strong>: Ngoài <strong>prettier</strong>,
         <strong>eslint-config-prettier</strong> và
         <strong>eslint-plugin-prettier</strong> thì còn lại đều là các plugin
-        tiêu chuẩn tương tự như bộ cài <strong>Create React App</strong>.
+        tiêu chuẩn tương tự như bộ cài <strong>Create React App</strong>. Do đó,
+        nếu bạn tạo project bằng <strong>Create React App</strong> thì bạn chỉ
+        cần install các package cho prettier configuration như sau:
       </p>
-      <p>Thêm các file cấu hình</p>
-      <p><strong>.eslintrc</strong></p>
+      <div class="terminal-no-header">
+        yarn add prettier eslint-plugin-prettier eslint-config-prettier -D
+      </div>
+      <h2>Thêm các file cấu hình</h2>
+      <app-code
+        [height]="'300px'"
+        [code]="env"
+        [language]="'.env'"
+        [filename]="'.env'"
+      ></app-code>
+      <p>
+        <strong>Tạo file <code>.env</code> ở thư mục gốc</strong> và thêm giá
+        trị này vào <code>EXTEND_ESLINT=true</code>. Mục đích là giúp chúng ta
+        có thể thêm các linter khác vào <strong>React</strong>.
+      </p>
+      <p>
+        <strong>.eslintrc</strong>: File này nhằm mục đích mở rộng cấu hình
+        ESLint React giúp bắt lỗi trên terminal, nếu bạn đã cài extension ESLint
+        thì nó sẽ dựa vào file này để bắt lỗi trực tiếp trên editor nữa.
+      </p>
       <app-code
         [height]="'300px'"
         [class]="'terminal-no-header'"
         [code]="eslintrc"
         [language]="'json'"
       ></app-code>
-      <p><strong>.eslintignore</strong></p>
+      <p>
+        <strong>.eslintignore</strong>: File này định danh các đường dẫn mà
+        không cần bắt lỗi với ESLint
+      </p>
       <app-code
         [height]="'300px'"
         [class]="'terminal'"
         [code]="eslintignore"
       ></app-code>
-      <p><strong>.prettierrc</strong></p>
+      <p>
+        <strong>.prettierrc</strong>: file này quy định các rule cho
+        <strong>prettier</strong>.
+      </p>
       <app-code
         [height]="'300px'"
         [class]="'terminal'"
@@ -214,8 +339,6 @@
         [class]="'terminal'"
         [code]="prettierignore"
       ></app-code>
-    </div>
-    <div #tabContent tab-title="Thêm script vào package.json">
       <h2>Thêm script vào package.json</h2>
       <app-code [height]="'300px'" [code]="packageJson"></app-code>
     </div>
@@ -395,17 +518,6 @@
     <div #tabContent tab-title="Thêm các files cần thiết để chạy demo project">
       <app-code
         [height]="'300px'"
-        [code]="env"
-        [language]="'.env'"
-        [filename]="'.env'"
-      ></app-code>
-      <p>
-        <strong>Tạo file <code>.env</code> ở thư mục gốc</strong> và thêm giá
-        trị này vào <code>EXTEND_ESLINT=true</code>. Mục đích là giúp chúng ta
-        có thể thêm các linter khác vào <strong>React</strong>.
-      </p>
-      <app-code
-        [height]="'300px'"
         [code]="editorconfig"
         [language]="'.editorconfig'"
         [filename]="'.editorconfig'"
@@ -422,11 +534,6 @@
       ></app-code>
       <app-code
         [height]="'300px'"
-        [code]="reportWebVitals"
-        [filename]="'src/reportWebVitals.ts'"
-      ></app-code>
-      <app-code
-        [height]="'300px'"
         [code]="indexTsx"
         [filename]="'src/index.tsx'"
       ></app-code>
@@ -435,6 +542,58 @@
         [code]="appTsx"
         [filename]="'src/App/App.tsx'"
       ></app-code>
+      <app-code
+        [height]="'300px'"
+        [code]="reportWebVitals"
+        [filename]="'src/reportWebVitals.ts'"
+      ></app-code>
+      <p>
+        <strong>Core Web Vitals</strong> (vừa được Google update vào 6/2021) là
+        những chỉ được đo bởi Chrome UX report và Google Search Console nhằm
+        đánh giá performance của website và xếp hạng điểm SEO. Mỗi chỉ số đại
+        diện cho một khía cạnh về trải nghiệm người dùng, tương ứng với các yếu
+        tố xếp hạng sau:
+      </p>
+      <ul>
+        <li><em>Loading</em>: Tốc độ tải trang</li>
+        <li><em>Interactivity</em>: Khả năng tương tác</li>
+        <li><em>Visual stability</em>: Tính ổn định khi hiển thị</li>
+      </ul>
+      <p>
+        Dựa trên 3 chỉ số tương ứng dưới đây hình thành lên Core Web Vitals, đó
+        là:
+      </p>
+      <ul>
+        <li>
+          <strong>LCP (Largest Contentful Paint)</strong>: LCP đo lường
+          <em
+            >Thời gian tải hoàn tất nội dung chính được hiển thị đầu tiên khi
+            trang tải xong</em
+          >. Chỉ số LCP lý tưởng phải đạt 2,5 giây hoặc nhanh hơn.
+        </li>
+        <li>
+          <strong>FID (First Input Delay)</strong>: Thời gian người dùng phản
+          hồi tương tác đầu tiên trên website. Chỉ số FID cần tối ưu để đạt dưới
+          100 mili giây.
+        </li>
+        <li>
+          <strong>CLS (Cumulate Layout Shift)</strong>: Điểm số thay đổi bố cục
+          ở dạng tích lũy. Hay có thể hiểu đây là chỉ số đo khối lượng layout
+          hình ảnh bị dịch chuyển đột ngột trên website. Chỉ số CLS tốt nhất mà
+          mỗi website cần đạt được để có trải nghiệm tốt nhất là dưới 0,1.
+        </li>
+      </ul>
+      <div>
+        <em
+          >Xem thêm về Core Web Vitals
+          <a
+            href="https://www.sapo.vn/blog/core-web-vitals-tro-thanh-yeu-to-xep-hang-moi"
+            target="_blank"
+            rel="noopener noreferrer"
+            >tại đây</a
+          >.</em
+        >
+      </div>
     </div>
     <div #tabContent tab-title="Chạy project">
       <h2>Cấu trúc folders và files hoàn chỉnh</h2>
@@ -492,6 +651,148 @@
           >
         </li>
       </ul>
+    </div>
+  </app-tabs>
+</ng-template>
+<ng-template #vscode>
+  <app-tabs>
+    <div #tabContent tab-title="Extensions">
+      <h2>Các Extension cho Visual Studio Code hữu ích khi code React</h2>
+      <ul>
+        <li>
+          <strong>Atom One Dark Theme</strong>: Theme Atom cho VS Code, đẹp hơn
+          theme mặc định nhiều.
+        </li>
+        <li>
+          <strong>Auto Close Tag</strong>: Tự động đóng tag khi code HTML, JSX
+        </li>
+        <li>
+          <strong>Auto Rename Tag</strong>: Tự động đổi tên tag khi code HTML,
+          JSX. Kết hợp với Auto Close Tag sẽ thành bộ đôi tuyệt vời
+        </li>
+        <li>
+          <strong>Bookmarks</strong>: Đánh dấu dòng code để tìm kiếm dễ dàng.
+          Khi code bạn dài ngoằn, việc phải scroll lên, scroll xuống để tìm và
+          code khá mệt mỏi. Lúc này chỉ cần đánh dấu vị trí, sau đó bạn chỉ cần
+          trỏ đến vị trí đó là editor sẽ mở ngay tại vị trí bookmark luôn.
+        </li>
+        <li>
+          <strong>Bracket Pair Colorizer</strong>: Giúp phân biệt các dấu
+          &#123;()&#125; khi nó trở nên quá nhiều
+        </li>
+        <li>
+          <strong>Code Spelling Checker</strong>: Kiểm tra lỗi chính tả khi code
+          (tiếng Anh thôi nhé)
+        </li>
+        <li><strong>EditorConfig</strong>: Để chạy được file .editorconfig.</li>
+        <li>
+          <strong>ES7 React/Redux/React-Native/JS snippets</strong>: Snippet cho
+          React, Redux
+        </li>
+        <li><strong>ESLint:</strong> ESLint cho editor</li>
+        <li>
+          <strong>GitLens</strong>: Quản lý code tốt hơn với git, hiện thông tin
+          người thay đổi file, commit,…
+        </li>
+        <li><strong>html to JSX</strong>: Chuyển HTML thành JSX</li>
+        <li>
+          <strong>Live Server</strong>: Tạo server auto reload khi code html
+          tĩnh
+        </li>
+        <li>
+          <strong>Material Icon Theme</strong>: Thêm bộ theme icon cho các file,
+          folder giúp bạn nhận biết file nhanh chóng
+        </li>
+        <li><strong>Prettier</strong>: Format code đẹp, xịn</li>
+        <li><strong>SVG Viewer</strong>: Xem ảnh svg trên editor</li>
+        <li>
+          <strong>vscode-styled-components</strong>: Highlight và auto-complete
+          cho styled-component như khi code trên file css vậy
+        </li>
+      </ul>
+    </div>
+    <div #tabContent tab-title="Cấu hình Editor Config">
+      <h2>Cài đặt Workspace setting cho VS Code</h2>
+      <div>
+        <em
+          >VS Code có 2 dạng setting, một là cho user, hai là cho workspace. Nếu
+          chúng ta không set workspace thì mặc định VS Code sẽ lấy setting ở
+          user. Và setting cũng có 2 cách setting, 1 là setting bằng file JSON,
+          2 là bằng UI.</em
+        >
+      </div>
+      <p><strong>Setting VS Code workspace và .editorconfig</strong></p>
+      <ol>
+        <li>
+          Tạo file ./vscode/settings.json ở thư mục chính (root folder):
+          <app-code
+            [height]="'300px'"
+            [code]="vscodeSetting"
+            [language]="'json'"
+            [filename]="'./vscode/settings.json'"
+          ></app-code>
+          <p><strong>Giải thích:</strong></p>
+          <ul>
+            <li>
+              Chọn <strong>Default Formatter</strong> là
+              <strong>Prettier</strong>
+            </li>
+            <li>
+              <code>"editor.formatOnSave": true</code> để khi lưu thì sẽ tự động
+              format (bằng ESLint hay bằng Prettier thì như ta đã định nghĩa
+              phía trên)
+            </li>
+            <li>
+              <code>"eslint.format.enable": true</code> để bật tính năng format
+              code của ESLint.
+            </li>
+            <li>
+              <code>"source.fixAll.eslint": true</code> để khi lưu thì ESLint sẽ
+              tự động format và fix lỗi ESLint cho chúng ta luôn.
+            </li>
+          </ul>
+        </li>
+        <li>
+          Bổ sung thêm <strong>recommended extension</strong> vào workspace, để
+          khi ai mở source code lên thì VS Code sẽ khuyên cài thêm các extension
+          này. Chúng ta thêm file <code>extensions.json</code> trong folder
+          <code>.vscode</code> nhé. Đây là các extension đã liệt kê phía trên,
+          chúng ta chỉ cần copy file này bỏ vào source thì editor sẽ hiện lên
+          các recommended extension, không cần tìm kiếm từng cái.
+          <app-code
+            [height]="'300px'"
+            [code]="recommendedExtension"
+            [language]="'json'"
+            [filename]="'./vscode/extensions.json'"
+          ></app-code>
+          <p>
+            <em
+              >Điều này vô cùng hữu ích khi làm việc nhóm, để thống nhất các
+              extension và setting giữa các member với nhau thì ta nên share cái
+              folder .vscode (cứ để nguyên nó trong source, đừng bỏ vào
+              .gitignore là được 😛 ).</em
+            >
+          </p>
+        </li>
+        <li>
+          Thêm file <code>.editorconfig</code> trong root folder - Cần cài
+          <strong>Editor Config</strong> extension cho VS Code
+          <p>
+            <em>
+              EditorConfig sinh ra để thống nhất các chuẩn giữa các editor khác
+              nhau. Ví dụ người thì dùng indent là space, người thì dùng tab;
+              người thì indent là 2, người thì là 4. EditorConfig giúp code
+              chúng ta có tính thống nhất, dễ đọc và dễ bảo trì hơn.</em
+            >
+          </p>
+          <app-code
+            [height]="'300px'"
+            [code]="dotEdiorConfig"
+            [language]="'.editorconfig'"
+            [filename]="'.editorconfig'"
+          ></app-code>
+        </li>
+      </ol>
     </div>
   </app-tabs>
 </ng-template>
