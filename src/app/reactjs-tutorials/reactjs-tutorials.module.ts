@@ -3,9 +3,10 @@ import { CreateProjectComponent } from './pages/create-project/create-project.co
 import { NgModule } from '@angular/core';
 import { ReactjsTutorialsRoutingModule } from './reactjs-tutorials-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { ReactRouterComponent } from './pages/react-router/react-router.component';
 
 @NgModule({
-  declarations: [CreateProjectComponent],
+  declarations: [CreateProjectComponent, ReactRouterComponent],
   imports: [CommonModule, ReactjsTutorialsRoutingModule, SharedModule],
 })
 export class ReactjsTutorialsModule {}

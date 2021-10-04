@@ -4,6 +4,7 @@ import {
   ContentChildren,
   ElementRef,
   Input,
+  OnInit,
   QueryList,
   Renderer2,
   ViewChild,
@@ -16,7 +17,7 @@ import { EMPTY_STRING } from '../../constants/common';
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss'],
 })
-export class TabsComponent implements AfterContentInit {
+export class TabsComponent implements OnInit, AfterContentInit {
   @ViewChild('tabActions', { static: true }) tabActions: ElementRef | null =
     null;
   @ContentChildren('tabContent')
@@ -28,17 +29,32 @@ export class TabsComponent implements AfterContentInit {
   tabContentClass = EMPTY_STRING;
   containerClass = 'tab-container-column';
 
+  _orientation: 'vertical' | 'horizontal' = 'vertical';
   @Input()
   set orientation(value: 'vertical' | 'horizontal') {
+    this._orientation = value;
     if (value === 'horizontal') {
-      this.actionsClasses = 'nav-tabs';
+      this.actionsClasses = 'tab-actions-row';
       this.tabContentClass = 'tab-content-row';
       this.containerClass = 'tab-container-row';
     }
   }
 
+  horizontalScroll = false;
+
   // eslint-disable-next-line prettier/prettier
   constructor(private renderer: Renderer2) {}
+
+  ngOnInit(): void {
+    if (this._orientation === 'horizontal') {
+      setTimeout(() => {
+        const divTabAction = document.getElementById('tab-actions');
+        if (divTabAction) {
+          this.horizontalScroll = this.isScrollable(divTabAction, 'horizontal');
+        }
+      }, 0);
+    }
+  }
 
   ngAfterContentInit(): void {
     if (this.tabContentChildren) {
@@ -72,5 +88,45 @@ export class TabsComponent implements AfterContentInit {
         },
       );
     }
+  }
+
+  scrollLeft(element: HTMLDivElement): void {
+    element.scrollBy({ behavior: 'smooth', top: 0, left: -200 });
+  }
+
+  scrollRight(element: HTMLDivElement): void {
+    element.scrollBy({ behavior: 'smooth', top: 0, left: +200 });
+  }
+
+  isScrollable(
+    ele: HTMLElement,
+    orientation: 'horizontal' | 'vertical',
+  ): boolean {
+    let hasScrollableContent = false;
+    let isOverflowHidden = false;
+
+    if (orientation === 'vertical') {
+      // Compare the height to see if the element has scrollable content
+      hasScrollableContent = ele.scrollHeight > ele.clientHeight;
+
+      // It's not enough because the element's `overflow-y` style can be set as
+      // * `hidden`
+      // * `hidden !important`
+      // In those cases, the scrollbar isn't shown
+      const overflowYStyle = window.getComputedStyle(ele).overflowY;
+      isOverflowHidden = overflowYStyle.indexOf('hidden') !== -1;
+    } else {
+      // Compare the width to see if the element has scrollable content
+      hasScrollableContent = ele.scrollWidth > ele.clientWidth;
+
+      // It's not enough because the element's `overflow-x` style can be set as
+      // * `hidden`
+      // * `hidden !important`
+      // In those cases, the scrollbar isn't shown
+      const overflowXStyle = window.getComputedStyle(ele).overflowX;
+      isOverflowHidden = overflowXStyle.indexOf('hidden') !== -1;
+    }
+
+    return hasScrollableContent && !isOverflowHidden;
   }
 }

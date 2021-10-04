@@ -1,3 +1,9 @@
 .transition-padding {
   transition: padding-left 0.3s ease-in-out;
 }
+
+.content-width {
+  width: 100%;
+  height: calc(100vh - 56px);
+  overflow-y: auto;
+}
