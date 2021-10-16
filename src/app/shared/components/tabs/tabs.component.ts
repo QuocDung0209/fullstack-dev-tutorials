@@ -114,6 +114,7 @@ export class TabsComponent implements OnInit, AfterContentInit, OnDestroy {
   ngOnDestroy(): void {
     this.resizeObserver?.disconnect();
     this.horizontalScrollEvent.unsubscribe();
+    this.verticalScrollEvent.unsubscribe();
   }
 
   onSelectedTab(tabIndex: number, ele: HTMLElement): void {

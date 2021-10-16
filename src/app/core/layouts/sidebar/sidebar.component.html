@@ -4,6 +4,7 @@
   class="btn btn-menu"
   (click)="toggle()"
   [class.menu-hidden]="!isOpened"
+  [style.top.px]="isOpened ? 60 : 8"
 >
   <i
     [hidden]="!isOpened"
@@ -25,7 +26,7 @@
         [routerLink]="route.routerLink"
         routerLinkActive="active"
       >
-        {{route.name}}
+        <span>{{route.name}}</span>
       </li>
     </ng-container>
   </ul>
