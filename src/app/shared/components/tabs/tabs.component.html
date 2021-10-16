@@ -1,27 +1,48 @@
-<div [class]="containerClass" [ngClass]="class">
-  <div class="d-flex flex-row">
+<div class="tab-container" [class.vertical]="isVertical">
+  <div class="tab-actions">
     <button
-      *ngIf="horizontalScroll"
+      *ngIf="hasHorizontalScroll || hasVerticalScroll"
       class="scroll-left"
-      (click)="scrollLeft(tabActions)"
+      (click)="scrollStart(tabActions)"
+      [class.button-disabled]="isStart"
     >
-      <i class="fa fa-angle-left" aria-hidden="true"></i>
+      <i
+        *ngIf="isVertical; else angleLeft"
+        class="fa fa-angle-up"
+        aria-hidden="true"
+      ></i>
+      <ng-template #angleLeft>
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+      </ng-template>
     </button>
-    <div
-      #tabActions
-      id="tab-actions"
-      class="nav"
-      [ngClass]="actionsClasses"
-    ></div>
+    <div #tabActions class="tab-actions-list">
+      <div
+        #tabTitle
+        *ngFor="let title of tabsTitle; index as tabIndex"
+        (click)="onSelectedTab(tabIndex, tabTitle)"
+        class="tab-title"
+        [class.active]="tabIndex === selectedTab"
+      >
+        {{title}}
+      </div>
+    </div>
     <button
-      *ngIf="horizontalScroll"
+      *ngIf="hasHorizontalScroll || hasVerticalScroll"
       class="scroll-right"
-      (click)="scrollRight(tabActions)"
+      (click)="scrollEnd(tabActions)"
+      [class.button-disabled]="isEnd"
     >
-      <i class="fa fa-angle-right" aria-hidden="true"></i>
+      <i
+        *ngIf="isVertical; else angleRight"
+        class="fa fa-angle-down"
+        aria-hidden="true"
+      ></i>
+      <ng-template #angleRight>
+        <i class="fa fa-angle-right" aria-hidden="true"></i>
+      </ng-template>
     </button>
   </div>
-  <div id="tab-content" class="tab-content" [ngClass]="tabContentClass">
+  <div class="tab-content">
     <ng-content></ng-content>
   </div>
 </div>

@@ -1,101 +1,147 @@
+/* eslint-disable prettier/prettier */
+
 import {
   AfterContentInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChildren,
   ElementRef,
   Input,
+  NgZone,
+  OnDestroy,
   OnInit,
   QueryList,
   Renderer2,
   ViewChild,
 } from '@angular/core';
+import { BehaviorSubject, fromEvent } from 'rxjs';
 
 import { EMPTY_STRING } from '../../constants/common';
+import { TabComponent } from './tab/tab.component';
+import { debounceTime, distinctUntilChanged, skip, skipUntil, takeLast } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TabsComponent implements OnInit, AfterContentInit {
-  @ViewChild('tabActions', { static: true }) tabActions: ElementRef | null =
-    null;
-  @ContentChildren('tabContent')
-  tabContentChildren: QueryList<ElementRef> | null = null;
+export class TabsComponent implements OnInit, AfterContentInit, OnDestroy {
+  @ViewChild('tabActions', { static: true }) tabActions: ElementRef | null = null;
+  @ContentChildren(TabComponent)
+  tabContentChildren: QueryList<TabComponent> | null = null;
+
+  selectedTab = 0;
+  tabsTitle: string[] = [];
 
   @Input() class = EMPTY_STRING;
-
-  actionsClasses = 'nav-pills flex-column tab-content-column';
-  tabContentClass = EMPTY_STRING;
-  containerClass = 'tab-container-column';
 
   _orientation: 'vertical' | 'horizontal' = 'vertical';
   @Input()
   set orientation(value: 'vertical' | 'horizontal') {
     this._orientation = value;
-    if (value === 'horizontal') {
-      this.actionsClasses = 'tab-actions-row';
-      this.tabContentClass = 'tab-content-row';
-      this.containerClass = 'tab-container-row';
-    }
   }
 
-  horizontalScroll = false;
+  hasHorizontalScroll = false;
+  resizeObserver: ResizeObserver | null = null;
 
-  // eslint-disable-next-line prettier/prettier
-  constructor(private renderer: Renderer2) {}
+  isStart = true;
+  isEnd = false;
+  horizontalScrollEvent: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  isVertical = false;
+  hasVerticalScroll = false;
+  verticalScrollEvent: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  constructor(
+    private renderer: Renderer2,
+    private changeDetectorRef: ChangeDetectorRef,
+    private ngZone: NgZone,
+  ) { }
 
   ngOnInit(): void {
-    if (this._orientation === 'horizontal') {
-      setTimeout(() => {
-        const divTabAction = document.getElementById('tab-actions');
-        if (divTabAction) {
-          this.horizontalScroll = this.isScrollable(divTabAction, 'horizontal');
-        }
-      }, 0);
+    this.isVertical = this._orientation === 'vertical';
+
+    this.horizontalScrollEvent.pipe(distinctUntilChanged(), skip(1)).subscribe((value) => {
+      this.hasHorizontalScroll = value;
+      this.changeDetectorRef.detectChanges();
+    })
+
+    this.verticalScrollEvent.pipe(distinctUntilChanged(), skip(1)).subscribe((value) => {
+      this.hasVerticalScroll = value;
+      this.changeDetectorRef.detectChanges();
+    })
+
+    this.resizeObserver = new ResizeObserver((entries) => {
+      entries.forEach((entry) => {
+        const hasHorizontalScroll = this.isScrollable((entry.target as HTMLElement), 'horizontal');
+        this.horizontalScrollEvent.next(hasHorizontalScroll);
+
+        const hasVerticalScroll = this.isScrollable((entry.target as HTMLElement), 'vertical');
+        this.verticalScrollEvent.next(hasVerticalScroll);
+      });
+    });
+
+    this.resizeObserver.observe(this.tabActions?.nativeElement);
+
+    if (this.tabActions) {
+      fromEvent(this.tabActions.nativeElement, 'scroll')
+        .pipe(debounceTime(100))
+        .subscribe((event: any) => {
+          const element = (event.target as HTMLElement);
+          if (!this.isVertical) {
+            this.isStart = element.scrollLeft === 0;
+            this.isEnd = element.scrollLeft + element.offsetWidth === element.scrollWidth;
+          } else {
+            this.isStart = element.scrollTop === 0;
+            this.isEnd = element.scrollTop + element.offsetHeight === element.scrollHeight;
+          }
+          this.changeDetectorRef.detectChanges();
+        })
     }
   }
 
   ngAfterContentInit(): void {
     if (this.tabContentChildren) {
-      this.tabContentChildren.forEach(
-        (elementRef: ElementRef, index: number) => {
-          const tabTitle =
-            elementRef.nativeElement.attributes['tab-title'].value;
-          const id = 'app-tabs-index-' + Math.floor(Math.random() * 1000);
-          const buttonElement: HTMLElement =
-            this.renderer.createElement('button');
-
-          // Create tab buttons
-          this.renderer.setProperty(buttonElement, 'innerText', tabTitle);
-          this.renderer.setAttribute(buttonElement, 'data-bs-toggle', 'tab');
-          this.renderer.setAttribute(buttonElement, 'data-bs-target', `#${id}`);
-          this.renderer.addClass(buttonElement, 'nav-link');
-          !index && this.renderer.addClass(buttonElement, 'active');
-          this.renderer.appendChild(
-            this.tabActions?.nativeElement,
-            buttonElement,
-          );
-
-          // Set up tab content
-          elementRef.nativeElement.id = id;
-          this.renderer.addClass(elementRef.nativeElement, 'tab-pane');
-          this.renderer.addClass(elementRef.nativeElement, 'fade');
-          if (!index) {
-            this.renderer.addClass(elementRef.nativeElement, 'active');
-            this.renderer.addClass(elementRef.nativeElement, 'show');
-          }
-        },
-      );
+      this.tabContentChildren.forEach((tab: TabComponent, index: number) => {
+        this.tabsTitle.push(tab.tabTitle);
+      });
+      this.tabContentChildren.first.active = true;
     }
   }
 
-  scrollLeft(element: HTMLDivElement): void {
-    element.scrollBy({ behavior: 'smooth', top: 0, left: -200 });
+  ngOnDestroy(): void {
+    this.resizeObserver?.disconnect();
+    this.horizontalScrollEvent.unsubscribe();
   }
 
-  scrollRight(element: HTMLDivElement): void {
-    element.scrollBy({ behavior: 'smooth', top: 0, left: +200 });
+  onSelectedTab(tabIndex: number, ele: HTMLElement): void {
+    if (this.tabContentChildren) {
+      this.tabContentChildren?.get(this.selectedTab)?.setActive(false);
+      this.selectedTab = tabIndex;
+      this.tabContentChildren?.get(tabIndex)?.setActive(true);
+    }
+
+    if (!this.isVertical) {
+      ele.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  scrollStart(element: HTMLDivElement): void {
+    if (this.isVertical) {
+      element.scrollBy({ behavior: 'smooth', top: -200, left: 0 });
+    } else {
+      element.scrollBy({ behavior: 'smooth', top: 0, left: -200 });
+    }
+  }
+
+  scrollEnd(element: HTMLDivElement): void {
+    if (this.isVertical) {
+      element.scrollBy({ behavior: 'smooth', top: +200, left: 0 });
+    } else {
+      element.scrollBy({ behavior: 'smooth', top: 0, left: +200 });
+    }
   }
 
   isScrollable(

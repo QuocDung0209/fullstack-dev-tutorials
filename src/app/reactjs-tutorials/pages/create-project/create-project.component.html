@@ -1,5 +1,5 @@
 <app-tabs [orientation]="'horizontal'">
-  <div #tabContent tab-title="Tạo project bằng create-react-app">
+  <app-tab [tabTitle]="'Tạo project bằng create-react-app'">
     <h1 class="text-center">Hướng dẫn tạo project bằng create-react-app</h1>
     <blockquote>
       Chúng ta cần cài đặt NodeJs trước khi bắt đầu:
@@ -51,12 +51,12 @@
         >
       </li>
     </ul>
-  </div>
-  <div #tabContent tab-title="Tạo project bằng Webpack sử dụng Typescript">
+  </app-tab>
+  <app-tab [tabTitle]="'Tạo project bằng Webpack sử dụng Typescript'">
     <h1 class="text-center">Hướng dẫn tạo và cấu hình project bằng Webpack</h1>
     <ng-container *ngTemplateOutlet="webpack"></ng-container>
-  </div>
-  <div #tabContent tab-title="Cấu trúc React Folder tối ưu">
+  </app-tab>
+  <app-tab [tabTitle]="'Cấu trúc React Folder tối ưu'">
     <div class="row">
       <div class="col-4">
         <div class="enlighter-default enlighter-t-atomic">
@@ -144,14 +144,14 @@
         >
       </li>
     </ul>
-  </div>
-  <div #tabContent tab-title="Cài đặt Extension và config VS Code">
+  </app-tab>
+  <app-tab [tabTitle]="'Cài đặt Extension và config VS Code'">
     <ng-container *ngTemplateOutlet="vscode"></ng-container>
-  </div>
+  </app-tab>
 </app-tabs>
 <ng-template #webpack>
   <app-tabs>
-    <div #tabContent tab-title="Webpack và Babel là gì?">
+    <app-tab [tabTitle]="'Webpack và Babel là gì?'">
       <blockquote>
         <b>Webpack</b> là một công cụ chạy trên môi trường <b>NodeJs</b>, giúp
         chúng ta đóng gói <b>js, css, image, font</b>… thành một hay nhiều file
@@ -161,16 +161,16 @@
         <b>Babel</b> là trình biên dịch Javascript thành các version thấp cấp
         hơn để phù hợp cho các trình duyệt khác nhau.
       </blockquote>
-    </div>
-    <div #tabContent tab-title="Khởi tạo project">
+    </app-tab>
+    <app-tab [tabTitle]="'Khởi tạo project'">
       <h2>Khởi tạo project</h2>
       <blockquote>
         <code>yarn init --yes</code> hoặc <code>npm init --yes</code>
       </blockquote>
       <h2>Cài đặt React</h2>
       <div class="terminal">yarn add react react-dom</div>
-    </div>
-    <div #tabContent tab-title="Cài đặt Webpack và các loader">
+    </app-tab>
+    <app-tab [tabTitle]="'Cài đặt Webpack và các loader'">
       <h2>Cài đặt Webpack và các loader</h2>
       <div [appClipboard]="true">
         <div class="terminal-no-header">
@@ -212,8 +212,8 @@
           <strong>ts-loader</strong>: Giúp tích hợp Typescript vào webpack
         </li>
       </ul>
-    </div>
-    <div #tabContent tab-title="Cài đặt một số plugin bổ trợ webpack">
+    </app-tab>
+    <app-tab [tabTitle]="'Cài đặt một số plugin bổ trợ webpack'">
       <h2>Cài đặt một số plugin bổ trợ webpack</h2>
       <div [appClipboard]="true">
         <div class="terminal-no-header">
@@ -268,8 +268,8 @@
           build, coi thử thư viện nào đang chiếm bao nhiêu % bản build,…
         </li>
       </ul>
-    </div>
-    <div #tabContent tab-title="Cài đặt ESLint và Prettier">
+    </app-tab>
+    <app-tab [tabTitle]="'Cài đặt ESLint và Prettier'">
       <h2>Cài đặt ESLint và Prettier</h2>
       <div [appClipboard]="true">
         <div class="terminal-no-header">
@@ -341,12 +341,12 @@
       ></app-code>
       <h2>Thêm script vào package.json</h2>
       <app-code [height]="'300px'" [code]="packageJson"></app-code>
-    </div>
-    <div #tabContent tab-title="Thêm file tsconfig.json">
+    </app-tab>
+    <app-tab [tabTitle]="'Thêm file tsconfig.json'">
       <h2>Thêm file tsconfig.json để cấu hình Typescript</h2>
       <app-code [height]="'300px'" [code]="tsconfig"></app-code>
-    </div>
-    <div #tabContent tab-title="Thêm file webpack.config.js">
+    </app-tab>
+    <app-tab [tabTitle]="'Thêm file webpack.config.js'">
       <h2>Thêm file webpack.config.js</h2>
       <app-code [height]="'300px'" [code]="webpackConfig"></app-code>
       <p><strong>Giải thích:</strong></p>
@@ -491,8 +491,8 @@
           terminal.
         </li>
       </ul>
-    </div>
-    <div #tabContent tab-title="Tạo thư mục public và các files">
+    </app-tab>
+    <app-tab [tabTitle]="'Tạo thư mục public và các files'">
       <app-code
         [height]="'300px'"
         [code]="index"
@@ -514,8 +514,8 @@
       <p><strong>public/favicon.icon</strong></p>
       <p><strong>public/logo192.png</strong></p>
       <p><strong>public/logo512.png</strong></p>
-    </div>
-    <div #tabContent tab-title="Thêm các files cần thiết để chạy demo project">
+    </app-tab>
+    <app-tab [tabTitle]="'Thêm các files cần thiết để chạy demo project'">
       <app-code
         [height]="'300px'"
         [code]="editorconfig"
@@ -594,8 +594,8 @@
           >.</em
         >
       </div>
-    </div>
-    <div #tabContent tab-title="Chạy project">
+    </app-tab>
+    <app-tab [tabTitle]="'Chạy project'">
       <h2>Cấu trúc folders và files hoàn chỉnh</h2>
       <div class="images">
         <img
@@ -620,8 +620,8 @@
         <code>yarn prettier</code>, <code>yarn prettier:fix</code> như đã định
         nghĩa trong file <strong>package.json</strong>.
       </blockquote>
-    </div>
-    <div #tabContent tab-title="Tài liệu tham khảo">
+    </app-tab>
+    <app-tab [tabTitle]="'Tài liệu tham khảo'">
       <h2>Tài liệu tham khảo</h2>
       <ul>
         <li>
@@ -651,12 +651,12 @@
           >
         </li>
       </ul>
-    </div>
+    </app-tab>
   </app-tabs>
 </ng-template>
 <ng-template #vscode>
   <app-tabs>
-    <div #tabContent tab-title="Extensions">
+    <app-tab [tabTitle]="'Extensions'">
       <h2>Các Extension cho Visual Studio Code hữu ích khi code React</h2>
       <ul>
         <li>
@@ -710,8 +710,8 @@
           cho styled-component như khi code trên file css vậy
         </li>
       </ul>
-    </div>
-    <div #tabContent tab-title="Cấu hình Editor Config">
+    </app-tab>
+    <app-tab [tabTitle]="'Cấu hình Editor Config'">
       <h2>Cài đặt Workspace setting cho VS Code</h2>
       <div>
         <em
@@ -780,9 +780,9 @@
           <p>
             <em>
               EditorConfig sinh ra để thống nhất các chuẩn giữa các editor khác
-              nhau. Ví dụ người thì dùng indent là space, người thì dùng tab;
-              người thì indent là 2, người thì là 4. EditorConfig giúp code
-              chúng ta có tính thống nhất, dễ đọc và dễ bảo trì hơn.</em
+              nhau. Ví dụ người thì dùng indent là space, người thì dùng
+              app-tab; người thì indent là 2, người thì là 4. EditorConfig giúp
+              code chúng ta có tính thống nhất, dễ đọc và dễ bảo trì hơn.</em
             >
           </p>
           <app-code
@@ -793,6 +793,6 @@
           ></app-code>
         </li>
       </ol>
-    </div>
+    </app-tab>
   </app-tabs>
 </ng-template>
