@@ -17,7 +17,7 @@
   ></i>
 </span>
 <div *ngIf="isShow" class="sidebar-container" [class.hidden]="!isOpened">
-  <div class="sidebar-header">{{pageInfo.name}}</div>
+  <div class="sidebar-header">{{pageInfo?.name}}</div>
   <ul class="sidebar">
     <ng-container *ngFor="let route of routes">
       <li

@@ -91,7 +91,7 @@
   background-color: rgb(32, 122, 253);
   color: #ffffff;
   opacity: 0.3;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.05s ease-in-out;
 }
 
 .menu-hidden:hover {
@@ -107,6 +107,6 @@
     border: none;
     color: transparent;
     background: transparent;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.1s ease-in-out;
   }
 }

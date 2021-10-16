@@ -31,7 +31,7 @@ export class SidebarComponent {
     router.events
       .pipe(filter((event) => event instanceof NavigationStart))
       .subscribe((event) => {
-        const activatingRoute = (event as { url: string })?.url?.split('/')[1];
+        const activatingRoute = (event as { url: string })?.url?.split('/')[1] || MAIN_ROUTES[0];
         this.isShow = MAIN_ROUTES.includes(activatingRoute);
         sidebarService.setIsOpened(this.isShow && this.isOpened);
         this.pageInfo = MAIN_PAGES[activatingRoute];
