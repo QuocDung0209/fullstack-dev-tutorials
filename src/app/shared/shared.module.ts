@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { TabComponent } from './components/tabs/tab/tab.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { TooltipDirective } from './directives/tooltip.directive';
+import { ClickoutsideDirective } from './directives/clickoutside.directive';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { TooltipDirective } from './directives/tooltip.directive';
     TooltipDirective,
     ClipboardDirective,
     TabComponent,
+    ClickoutsideDirective,
   ],
   imports: [CommonModule],
   exports: [
