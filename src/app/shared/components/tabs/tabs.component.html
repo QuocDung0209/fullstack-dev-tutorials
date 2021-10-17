@@ -1,8 +1,19 @@
-<div class="tab-container" [class.vertical]="isVertical">
+<div
+  class="tab-container"
+  [class.vertical]="isVertical"
+  [class.mobile-view]="isVertical && isMobile"
+>
   <div class="tab-actions">
     <button
+      *ngIf="isVertical && isMobile"
+      class="btn btn-primary btn-tab-menu"
+      (click)="isShow = !isShow"
+    >
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <button
       *ngIf="hasHorizontalScroll || hasVerticalScroll"
-      class="scroll-left"
+      class="scroll-start"
       (click)="scrollStart(tabActions)"
       [class.button-disabled]="isStart"
     >
@@ -15,7 +26,7 @@
         <i class="fa fa-angle-left" aria-hidden="true"></i>
       </ng-template>
     </button>
-    <div #tabActions class="tab-actions-list">
+    <div #tabActions class="tab-actions-list" [class.show]="isShow">
       <div
         #tabTitle
         *ngFor="let title of tabsTitle; index as tabIndex"
@@ -28,7 +39,7 @@
     </div>
     <button
       *ngIf="hasHorizontalScroll || hasVerticalScroll"
-      class="scroll-right"
+      class="scroll-end"
       (click)="scrollEnd(tabActions)"
       [class.button-disabled]="isEnd"
     >

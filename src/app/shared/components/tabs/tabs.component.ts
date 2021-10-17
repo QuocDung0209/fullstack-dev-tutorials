@@ -15,11 +15,12 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { BehaviorSubject, fromEvent } from 'rxjs';
+import { BehaviorSubject, fromEvent, Subscription } from 'rxjs';
 
 import { EMPTY_STRING } from '../../constants/common';
 import { TabComponent } from './tab/tab.component';
-import { debounceTime, distinctUntilChanged, skip, skipUntil, takeLast } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, skip } from 'rxjs/operators';
+import { MobileService } from 'src/app/core/services/mobile.service';
 
 @Component({
   selector: 'app-tabs',
@@ -54,14 +55,27 @@ export class TabsComponent implements OnInit, AfterContentInit, OnDestroy {
   hasVerticalScroll = false;
   verticalScrollEvent: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  isShow = false;
+  isMobile = window.screen.width < 992;
+  isMobileSubsciption: Subscription | null = null;
+
   constructor(
     private renderer: Renderer2,
     private changeDetectorRef: ChangeDetectorRef,
     private ngZone: NgZone,
-  ) { }
+    private mobileService: MobileService,
+  ) {
+  }
 
   ngOnInit(): void {
     this.isVertical = this._orientation === 'vertical';
+
+    if (this.isVertical) {
+      this.isMobileSubsciption = this.mobileService.isMobile$.subscribe(value => {
+        this.isMobile = value;
+        this.changeDetectorRef.markForCheck();
+      })
+    }
 
     this.horizontalScrollEvent.pipe(distinctUntilChanged(), skip(1)).subscribe((value) => {
       this.hasHorizontalScroll = value;
@@ -115,6 +129,7 @@ export class TabsComponent implements OnInit, AfterContentInit, OnDestroy {
     this.resizeObserver?.disconnect();
     this.horizontalScrollEvent.unsubscribe();
     this.verticalScrollEvent.unsubscribe();
+    this.isMobileSubsciption && this.isMobileSubsciption.unsubscribe();
   }
 
   onSelectedTab(tabIndex: number, ele: HTMLElement): void {

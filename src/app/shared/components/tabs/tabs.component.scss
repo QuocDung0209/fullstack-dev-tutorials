@@ -78,11 +78,11 @@ $white-color: #ffffff;
     width: auto;
     flex-direction: column;
 
-    .scroll-left {
+    .scroll-start {
       border-top-right-radius: 5px;
     }
 
-    .scroll-right {
+    .scroll-end {
       border-top-right-radius: 0;
       border-bottom-left-radius: 5px;
       border-bottom-right-radius: 5px;
@@ -121,8 +121,48 @@ $white-color: #ffffff;
   }
 }
 
-.scroll-left,
-.scroll-right {
+.tab-container.vertical.mobile-view {
+  // .tab-actions::before {
+  //   content: '';
+  //   position: absolute;
+  //   left: 0;
+  //   top: 0.25em;
+  //   width: 1em;
+  //   height: 0.15em;
+  //   background: black;
+  //   box-shadow: 0 0.25em 0 0 black, 0 0.5em 0 0 black;
+  // }
+
+  .tab-actions {
+    .btn-tab-menu {
+      position: absolute;
+      left: 0px;
+      z-index: 1000;
+      background-color: $primary-color;
+    }
+
+    .tab-actions-list {
+      display: none;
+    }
+
+    .tab-actions-list.show {
+      display: block;
+      position: absolute;
+      left: 50px;
+      background-color: $white-color;
+      border-radius: 5px;
+      box-shadow: 0 2px 15px lighten($color: $black-color, $amount: 70);
+      z-index: 99;
+    }
+
+    .scroll-start {
+      margin-top: 25vh;
+    }
+  }
+}
+
+.scroll-start,
+.scroll-end {
   border: none;
   border-radius: 0;
   background-color: lighten($color: $primary-color, $amount: 10);
@@ -130,16 +170,16 @@ $white-color: #ffffff;
   padding: 0 10px;
 }
 
-.scroll-left {
+.scroll-start {
   border-top-left-radius: 5px;
 }
 
-.scroll-right {
+.scroll-end {
   border-top-right-radius: 5px;
 }
 
-.scroll-left:hover,
-.scroll-right:hover {
+.scroll-start:hover,
+.scroll-end:hover {
   background-color: darken($color: $primary-color, $amount: 10);
 }
 
