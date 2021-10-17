@@ -1,6 +1,6 @@
 [build]
   command = "yarn build"
-  publish = "/build"
+  publish = "/dist/fullstack-dev-tutorials"
   base = "/"
 
 [[redirects]]
