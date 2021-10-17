@@ -1,10 +1,11 @@
 import { Component, OnDestroy } from '@angular/core';
-import { Observable, fromEvent } from 'rxjs';
-import { debounceTime, map, takeUntil } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { SIDEBAR_OPEN_FEFAULT } from './shared/constants/common';
 import { SidebarService } from './core/services/sidebar.service';
 import { TakeUntilDestroy } from './core/decorators/take-until-destroy.decorator';
+import { MobileService } from './core/services/mobile.service';
 
 @Component({
   selector: 'app-root',
@@ -21,21 +22,16 @@ export class AppComponent implements OnDestroy {
   @TakeUntilDestroy() componentDestroy!: () => Observable<unknown>;
 
   // eslint-disable-next-line prettier/prettier
-  constructor(private sidebarService: SidebarService) {
+  constructor(private sidebarService: SidebarService, private mobileService: MobileService) {
     sidebarService.isOpened$.subscribe((value) => {
       this.isOpened = value;
     });
-    fromEvent(window, 'resize')
-      .pipe(
-        debounceTime(500),
-        map(() => window.screen.width),
-        takeUntil(this.componentDestroy()),
-      )
-      .subscribe((value) => {
-        this.isMobile = value < 768;
-      });
+
+    mobileService.isMobile$.pipe(takeUntil(this.componentDestroy())).subscribe(value => {
+      this.isMobile = value;
+    })
   }
 
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void { }
 }

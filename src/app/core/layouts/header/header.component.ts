@@ -1,8 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
-import { fromEvent, Observable } from 'rxjs';
-import { debounceTime, map, takeUntil } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { MAIN_PAGES } from 'src/app/shared/constants/routes.constant';
 import { TakeUntilDestroy } from '../../decorators/take-until-destroy.decorator';
+import { MobileService } from '../../services/mobile.service';
 import { SidebarService } from '../../services/sidebar.service';
 
 @Component({
@@ -17,16 +18,10 @@ export class HeaderComponent implements OnDestroy {
   // eslint-disable-next-line prettier/prettier
   @TakeUntilDestroy() componentDestroy!: () => Observable<unknown>;
 
-  constructor(private sidebarService: SidebarService) {
-    fromEvent(window, 'resize')
-      .pipe(
-        debounceTime(500),
-        map(() => window.screen.width),
-        takeUntil(this.componentDestroy()),
-      )
-      .subscribe((value) => {
-        this.isMobile = value < 768;
-      });
+  constructor(private sidebarService: SidebarService, private mobileService: MobileService) {
+    mobileService.isMobile$.pipe(takeUntil(this.componentDestroy())).subscribe(value => {
+      this.isMobile = value;
+    })
     this.headerLinks = Object.entries(MAIN_PAGES).map(([, value]) => {
       return { name: value.name, routerLink: '/' + value.mainRoute };
     });
