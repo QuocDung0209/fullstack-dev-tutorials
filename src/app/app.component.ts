@@ -41,7 +41,8 @@ export class AppComponent implements OnDestroy {
     })
 
     router.events.pipe(
-      filter(event => event instanceof NavigationStart || event instanceof NavigationEnd)
+      filter(event => event instanceof NavigationStart || event instanceof NavigationEnd),
+      takeUntil(this.componentDestroy()),
     ).subscribe(event => {
       if (event instanceof NavigationStart) {
         this.spinnerSubscription = this.loadingService.spinner$.subscribe();
