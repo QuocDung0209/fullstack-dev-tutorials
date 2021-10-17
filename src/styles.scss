@@ -1,4 +1,9 @@
 /***********************************************
+*** CSS Variables
+************************************************/
+$primary-color: rgb(13, 110, 253);
+
+/***********************************************
 *** CSS For Tooltip Directive
 ************************************************/
 .ng-tooltip {
@@ -14,11 +19,11 @@
   opacity: 0;
 }
 .ng-tooltip:after {
-  content: "";
+  content: '';
   position: absolute;
   border-style: solid;
 }
-.ng-tooltip[data-popper-placement^="top"]:after,
+.ng-tooltip[data-popper-placement^='top']:after,
 .ng-tooltip-top:after {
   top: 100%;
   left: 50%;
@@ -26,7 +31,7 @@
   border-width: 5px;
   border-color: black transparent transparent transparent;
 }
-.ng-tooltip[data-popper-placement^="bottom"]:after,
+.ng-tooltip[data-popper-placement^='bottom']:after,
 .ng-tooltip-bottom:after {
   bottom: 100%;
   left: 50%;
@@ -34,7 +39,7 @@
   border-width: 5px;
   border-color: transparent transparent black transparent;
 }
-.ng-tooltip[data-popper-placement^="left"]:after,
+.ng-tooltip[data-popper-placement^='left']:after,
 .ng-tooltip-left:after {
   top: 50%;
   left: 100%;
@@ -42,7 +47,7 @@
   border-width: 5px;
   border-color: transparent transparent transparent black;
 }
-.ng-tooltip[data-popper-placement^="right"]:after,
+.ng-tooltip[data-popper-placement^='right']:after,
 .ng-tooltip-right:after {
   top: 50%;
   right: 100%;
@@ -110,7 +115,7 @@
 }
 
 .terminal::before {
-  content: "\2022 \2022 \2022";
+  content: '\2022 \2022 \2022';
   position: absolute;
   top: 0;
   left: 0;
@@ -178,7 +183,7 @@
 }
 
 .btn-clipboard:hover:before {
-  content: "Copy to Clipboard";
+  content: 'Copy to Clipboard';
   /**** Left *****/
   right: 100%;
   left: auto;
@@ -199,7 +204,7 @@
 }
 
 .btn-clipboard:hover:after {
-  content: "";
+  content: '';
   /**** Top *****
   // top: 0;
   // margin-top: -8px;
@@ -216,7 +221,7 @@
 }
 
 .copied .btn-clipboard:hover:before {
-  content: "Copied!";
+  content: 'Copied!';
   width: 60px;
 }
 
@@ -243,4 +248,17 @@ h2,
 h3 {
   color: #444;
   font-weight: lighter;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: lighten($primary-color, 30);
+}
+
+::-webkit-scrollbar-thumb {
+  background: $primary-color;
+  border-radius: 5px;
 }

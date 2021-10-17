@@ -102,6 +102,7 @@ export class TabsComponent implements OnInit, AfterContentInit, OnDestroy {
     if (this.tabActions) {
       fromEvent(this.tabActions.nativeElement, 'scroll')
         .pipe(debounceTime(100))
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .subscribe((event: any) => {
           const element = (event.target as HTMLElement);
           if (!this.isVertical) {
@@ -118,7 +119,7 @@ export class TabsComponent implements OnInit, AfterContentInit, OnDestroy {
 
   ngAfterContentInit(): void {
     if (this.tabContentChildren) {
-      this.tabContentChildren.forEach((tab: TabComponent, index: number) => {
+      this.tabContentChildren.forEach((tab: TabComponent) => {
         this.tabsTitle.push(tab.tabTitle);
       });
       this.tabContentChildren.first.active = true;
